@@ -2,7 +2,7 @@
  * Copyright 2012, Tim Branyen (@tbranyen)
  * use.js may be freely distributed under the MIT license.
  */
-(function() {
+(function(window) {
 
 // Cache used to map configuration options between load and write.
 var buildMap = {};
@@ -66,7 +66,7 @@ define({
     if (typeof attach === "function") {
       normalize.attach = "return " + module.attach.toString() + ";";
     } else {
-      normalize.attach = "return window['" + module.attach + "'];";
+      normalize.attach = "return this['" + module.attach + "'] || exports['" + module.attach + "'];";
     }
 
     // Normalize the dependencies to have proper string characters
@@ -88,4 +88,4 @@ define({
   }
 });
 
-})();
+})(this);
